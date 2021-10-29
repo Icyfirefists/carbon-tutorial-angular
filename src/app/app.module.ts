@@ -1,9 +1,18 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+
+// carbon-components-angular default imports
+import { UIShellModule, IconModule, IconService } from 'carbon-components-angular';
+
+import {
+  NotificationModule,
+  UserAvatarModule,
+  AppSwitcherModule
+} from '@carbon/icons-angular';
 
 @NgModule({
   declarations: [
@@ -12,9 +21,21 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    UIShellModule,
+    IconModule,
+    NotificationModule,
+		UserAvatarModule,
+		AppSwitcherModule,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(protected iconService: IconService) {
+    iconService.registerAll([
+      Notification,
+      UserAvatar16,
+      AppSwitcher
+    ]);
+  }
+}
